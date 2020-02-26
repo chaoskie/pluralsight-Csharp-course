@@ -5,19 +5,22 @@ namespace GradeBook
 {
     public class Book{
         // variables
-        string name;
-        List<double> grades;
+        private string name;
+        public string Name {
+            get{return this.name;} 
+            set{this.name = value;}
+        }
 
-        public string Name(){return this.name;}
+        List<double> grades;
 
         // constructor
         public Book(string name){
-            this.name = name;
+            this.Name = name;
             this.grades = new List<double>();
         }
 
         public Book(string name, List<double> grades){
-            this.name = name;
+            this.Name = name;
             this.grades = grades;
         }
 
@@ -73,7 +76,7 @@ namespace GradeBook
         }
 
         public override string ToString(){
-            return $"This book is name {this.name} and contains {this.grades.Count} grades";
+            return $"This book is name {this.Name} and contains {this.grades.Count} grades";
         }
     }
 }
