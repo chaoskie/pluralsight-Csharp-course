@@ -6,7 +6,7 @@ namespace GradeBook.Tests
     public class TypeTests
     {
         [Fact]
-        public void Test1(){
+        public void BookNameTests(){
             Book book1 = GetBook("book1");
             Book book2 = GetBook("book2");
             setBookName(book1, "book2");
@@ -16,11 +16,45 @@ namespace GradeBook.Tests
             Assert.NotSame(book1,book2);
         }
 
+        [Fact]
+        public void StringActsLikeValueTypes(){
+            string name = "scott";
+            makeUpperCase(name);
+            Assert.NotEqual("SCOTT",name);            
+        }
+
+        private void makeUpperCase(string name){
+            name.ToUpper();
+        }
+
+        [Fact]
+        public void BookReferenceTestPassByValue(){
+            var book1 = GetBook("book1");
+            setBookNameReferenceTestByValue(book1, "new name");
+            Assert.Equal("book1",book1.Name);
+            Assert.NotEqual("new name",book1.Name);
+        }
+        private void setBookNameReferenceTestByValue(Book book, string name){
+            book = new Book(name);
+            book.Name = name;
+        }
+
+        [Fact]
+        public void BookReferenceTestPassByReference(){
+            var book1 = GetBook("book1");
+            setBookNameReferenceTestByReference(ref book1, "new name");
+            Assert.NotEqual("book1",book1.Name);
+            Assert.Equal("new name",book1.Name);
+        }
+        private void setBookNameReferenceTestByReference(ref Book book, string name){
+            book = new Book(name);
+        }        
+
         private void setBookName(Book book, string name){
             book.Name = name;
         }
 
-        [After]
+        [Fact]
         public void NotSameBooksTest()
         {
             Book book1 = GetBook("book 1");
